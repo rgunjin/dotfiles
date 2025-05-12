@@ -1,0 +1,155 @@
+{
+    "layer": "top", // Waybar at top layer "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 36, // Waybar height (to be removed for auto height)
+
+    // Choose the order of the modules
+    "modules-left": [ "clock", "custom/weather", "sway/language", "custom/scratchpad-indicator", "custom/pacman", "sway/mode"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": [ "custom/cpugovernor", "cpu", "temperature", "pulseaudio", "bluetooth", "network", "tray", "battery"],
+
+    // Modules configuration
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "<span color=\"#D8DEE9\"></span>",
+            "2": "<span color=\"#88C0D0\"></span>",
+            "3": "<span color=\"#A3BE8C\"></span>",
+            "4": "<span color=\"#D8DEE9\"></span>",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "sway/window": {
+        "format": "{}",
+        "max-length": 50, 
+        "tooltip": false
+    },
+    "bluetooth": {
+        "interval": 30,
+        "format": "{icon}",
+        // "format-alt": "{status}",
+        "format-icons": {
+            "enabled": "󰂯",
+            "disabled": "󰂲"
+        },
+        //"on-click": "blueberry"
+    },    
+    "sway/language": {
+        "format": "  {}",
+        "max-length": 5,
+        "min-length": 5,        
+    },
+    "tray": {
+        //"icon-size": 11,
+        "spacing": 5
+    },
+    "clock": {
+        "format": "  {:%H:%M    %e %b}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "today-format": "<b>{}</b>",
+        //"on-click": "gnome-calendar"
+    },
+    "cpu": {
+        "interval": "1",      
+        "format": "   {max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
+        "max-length": 13,
+        "min-length": 13,
+        "on-click": "foot -e htop --sort-key PERCENT_CPU",
+        "tooltip": false
+    },
+    "temperature": {
+        //"thermal-zone": 1,
+        "interval": "4",
+        //"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        "critical-threshold": 74,
+        "format-critical": "  {temperatureC}°C",
+        "format": "{icon}  {temperatureC}°C",
+        "format-icons": ["", "", ""],
+        "max-length": 7,
+        "min-length": 7
+    },
+    "network": {
+        // "interface": "wlan0", // (Optional) To force the use of this interface,
+        "format-wifi": "   {essid}",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} 󰈀",
+        "format-linked": "{ifname} (No IP) 󰈂",
+        "format-disconnected": "󰌙",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "family": "ipv4",
+        "tooltip-format-wifi": "   {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\n  {bandwidthUpBits}    {bandwidthDownBits}",
+        "tooltip-format-ethernet": "󰈁   {ifname}\nIP: {ipaddr}\n  {bandwidthUpBits}    {bandwidthDownBits}"
+    },
+    "pulseaudio": {
+        "scroll-step": 3, // %, can be a float
+        "format": "{icon}   {volume}% {format_source}",
+        "format-source": "󰍬",
+        "format-muted": "{icon}   {volume}% {format_source}",
+        "format-source-muted": "󰍭",
+        //"format-bluetooth": "{icon}   {volume}%   {format_source}",
+        //"format-bluetooth-muted": " {icon}   {format_source}",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "󰐺",
+            "headset": "󰐺",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    },
+    "custom/pacman": {
+        "format": "  {}",
+        "interval": 3600,                     // every hour
+        "exec": "checkupdates | wc -l",       // # of updates
+        "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "on-click": "foot fish -c 'sudo pacman -Suy; read'; pkill -SIGRTMIN+8 waybar",
+        "signal": 8,
+        "max-length": 5,
+        "min-length": 3
+    },
+    "custom/weather": {
+        "exec": "curl 'https://wttr.in/?format=1'",
+        "interval": 3600
+    },
+    "custom/cpugovernor": {
+      "format": "{icon}",
+      "interval": "30",
+      "return-type": "json",
+      "exec": "$HOME/.config/waybar/custom_modules/cpugovernor.sh",
+      "min-length": 2,
+      "max-length": 2,
+        "format-icons": {
+            "perf": "",
+            "sched": ""
+        },
+    },    
+    "custom/scratchpad-indicator": {
+        "interval": 3,
+        "return-type": "json",
+        "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
+        "format": "{}  ",
+        "on-click": "exec swaymsg 'scratchpad show'",
+        "on-click-right": "exec swaymsg 'move scratchpad'"
+    },
+    "battery": {
+        "bat": "BAT1",
+        "interval": 15,
+        "states": {
+            "warning": 35,
+            "critical": 10
+        },
+        "format-discharging": "{icon}   {capacity}%",
+        "format-charging": "   {capacity}%",
+        "format-full": "   {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "max-length": 25,
+    },
+}
