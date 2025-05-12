@@ -70,7 +70,6 @@ input "type:touchpad" {
 input "type:keyboard" {
     xkb_layout us,ru
     xkb_options grp:win_space_toggle
-    xkb_options ctrl:nocaps
 }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
