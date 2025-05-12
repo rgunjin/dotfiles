@@ -9,3 +9,5 @@ function fish_greeting
 end
 
 eval (starship init fish)
+
+bind ctrl-ц backward-kill-word
