@@ -11,3 +11,4 @@ end
 eval (starship init fish)
 
 bind ctrl-ц backward-kill-word
+bind ctrl-в 'test (commandline) = ""; and exit'
