@@ -5,16 +5,21 @@
 # Read `man 5 sway` for a complete reference.
 
 ### Gaps & Boarders
-gaps inner 8
+gaps inner 4
 default_border pixel 2
 default_floating_border pixel 2
 smart_gaps on
+smart_borders on
 
 # titlebar border / background / text / indicator / border
-client.focused #2986cc #2986cc #2986cc #2986cc #2986cc
+client.focused          #2986cc #2986cc #D8DEE9 #2986cc #2986cc
+client.unfocused        #434C5E #434C5E #D8DEE9 #434C5E #434C5E
+client.urgent           #BF616A #BF616A #D8DEE9 #BF616A #BF616A
+client.focused_inactive #434C5E #434C5E #D8DEE9 #434C5E #434C5E
+client.background       #2E3440
 
 # Font
-font pango:TerminessNerdFontMono 11
+font pango:Terminess Nerd Font Mono 16
 
 ### Variables
 #
