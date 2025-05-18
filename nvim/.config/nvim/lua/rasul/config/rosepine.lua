@@ -22,12 +22,12 @@ require('rose-pine').setup({
    	warn = 'gold',
    
    	headings = {
-   	    h1 = 'iris',
-   	    h2 = 'foam',
-   	    h3 = 'rose',
-   	    h4 = 'gold',
-   	    h5 = 'pine',
-   	    h6 = 'foam',
+   	   h1 = 'iris',
+   	   h2 = 'foam',
+   	   h3 = 'rose',
+   	   h4 = 'gold',
+   	   h5 = 'pine',
+   	   h6 = 'foam',
    	}
    	-- or set all headings at once
    	-- headings = 'subtle'
