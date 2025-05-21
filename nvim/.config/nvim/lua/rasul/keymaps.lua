@@ -25,6 +25,7 @@ map({ "n", "v" }, "<leader>d", [["_d]])
 -- This is going to get me cancelled
 map("i", "<C-c>", "<Esc>")
 
+
 map("n", "<leader>f", vim.lsp.buf.format)
 
 map("n", "<C-k>", "<cmd>cnext<CR>zz")
