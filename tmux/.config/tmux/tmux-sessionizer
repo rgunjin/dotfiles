@@ -1,16 +1,22 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
-session=$(find -L ~ ~/progs -mindepth 1 -maxdepth 1 -type d | fzf) || exit
-session_name=$(basename "$session" | tr . _)
+set session (find -L ~ ~/progs -mindepth 1 -maxdepth 1 -type d | fzf)
 
-if ! tmux has-session -t "$session_name" 2>/dev/null; then
-    tmux new-session -s "$session_name" -c "$session" -d
-fi
+if test -z $session
+    exit 0
+end
 
-tmux switch-client -t "$session_name"
+set session_name (basename $session | tr . _)
 
-if [ -z "$TMUX" ]; then
-    tmux attach-session -t "$session_name"
+printf '"%s"\n' $session
+printf '"%s"\n' $session_name
+printf '"%s"\n' $TMUX
+
+tmux has-session -t $session_name 2>/dev/null
+or tmux new-session -s $session_name -c $session -d
+
+if set -q TMUX
+    tmux switch-client -t $session_name
 else
-    tmux switch-client -t "$session_name"
-fi
+    tmux attach-session -t $session_name
+end
