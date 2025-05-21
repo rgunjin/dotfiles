@@ -8,10 +8,6 @@ end
 
 set session_name (basename $session | tr . _)
 
-printf '"%s"\n' $session
-printf '"%s"\n' $session_name
-printf '"%s"\n' $TMUX
-
 tmux has-session -t $session_name 2>/dev/null
 or tmux new-session -s $session_name -c $session -d
 
