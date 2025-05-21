@@ -8,6 +8,11 @@ function fish_greeting
     # remove greeting
 end
 
+set -gx PATH $HOME/.local/bin $PATH
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+set -gx PAGER less
+
 eval (starship init fish)
 
 bind ctrl-ц backward-kill-word
