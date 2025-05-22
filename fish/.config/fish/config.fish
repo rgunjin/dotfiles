@@ -12,6 +12,7 @@ set -gx PATH $HOME/.local/bin $PATH
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx PAGER less
+set -gx LESS "-RFX"
 
 eval (starship init fish)
 
