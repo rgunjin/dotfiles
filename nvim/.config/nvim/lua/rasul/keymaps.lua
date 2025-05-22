@@ -25,6 +25,7 @@ map({ "n", "v" }, "<leader>d", [["_d]])
 -- This is going to get me cancelled
 map("i", "<C-c>", "<Esc>")
 
+-- G-spot entry
 map("n", "<C-g>", function()
     vim.fn.jobstart({"tmux", "neww", "tmux-sessionizer"})
 end, { silent = true })
