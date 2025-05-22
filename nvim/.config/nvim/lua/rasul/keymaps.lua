@@ -30,6 +30,7 @@ map("n", "<C-g>", function()
     vim.fn.jobstart({"tmux", "neww", "tmux-sessionizer"})
 end, { silent = true })
 
+-- Format LSP
 map("n", "<leader>f", vim.lsp.buf.format)
 
 map("n", "<C-k>", "<cmd>cnext<CR>zz")
