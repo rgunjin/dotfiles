@@ -2,7 +2,7 @@
 
 # Задаём список языков и утилит
 set languages (string split " " "c cpp python rust golang")
-set core_utils (string split " " "find xargs sed awk")
+set core_utils (string split " " "cat read grep echo tr find xargs sed awk")
 
 # Объединяем два списка
 set options $languages $core_utils
