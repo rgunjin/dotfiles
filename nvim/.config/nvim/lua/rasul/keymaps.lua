@@ -4,6 +4,11 @@ vim.g.mapleader = " "
 
 map("n", "<leader>pv", vim.cmd.Ex)
 
+-- copy/past in system buffer
+map({"n", "v"}, "y", '"+y')
+map({"n", "v"}, "p", '"+p')
+map({"n", "v"}, "P", '"+P')
+
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
 
