@@ -43,8 +43,9 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 output * bg /media/Pictures/wallpapers/steam_boat_1.jpg fill
 #
 # Example configuration:
+output LVDS-1 mode 1366x768@60Hz position 0,0 adaptive_sync off
 #
-output HDMI-A-1 mode 1920x1080@60Hz position 1920,0 adaptive_sync on
+output HDMI-A-1 mode 1920x1080@24Hz position 1366,0 adaptive_sync off
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
