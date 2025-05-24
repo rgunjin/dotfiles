@@ -5,9 +5,10 @@ vim.g.mapleader = " "
 map("n", "<leader>pv", vim.cmd.Ex)
 
 -- copy/past in system buffer
-map({"n", "v"}, "y", '"+y')
-map({"n", "v"}, "p", '"+p')
-map({"n", "v"}, "P", '"+P')
+map({"n", "v"}, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+map("n", "<leader>Y", 'gg"+yG', { desc = "Yank whole buffer to system clipboard" })
+map({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+map({"n", "v"}, "<leader>P", '"+P', { desc = "Paste before cursor from system clipboard" })
 
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")

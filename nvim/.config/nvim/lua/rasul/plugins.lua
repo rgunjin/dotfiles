@@ -12,19 +12,53 @@ return {
   -- Telescope --------------------------------------------------------------
   {
     "nvim-telescope/telescope.nvim",
-    version      = "0.1.*",
+    version = "0.1.*",
     dependencies = { "nvim-lua/plenary.nvim" },
-    cmd          = "Telescope",
-    config       = function() require("rasul.config.telescope") end,
+    --lazy = false,
+    event = "BufReadPost",
+    keys = {
+      { "<leader>pf", function() require("telescope.builtin").find_files() end, desc = "Telescope: find files" },
+      { "<C-p>",      function() require("telescope.builtin").git_files()  end, desc = "Telescope: git files" },
+      {
+        "<leader>ps",
+        function()
+          require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ") })
+        end,
+        desc = "Telescope: grep string"
+      },
+    },
+    config = function()
+      require("rasul.config.telescope") -- только setup
+    end,
   },
 
   ----------------------------------------------------------------------------
   -- Harpoon 2 ---------------------------------------------------------------
   {
     "ThePrimeagen/harpoon",
-    branch = "harpoon2",          -- ветка со второй версией
-    event  = "VeryLazy",
-    config = function() require("rasul.config.harpoon") end,
+    branch = "harpoon2",
+    --lazy = false,
+    event = "BufReadPost",
+    keys = {
+      {
+        "<leader>ha",
+        function()
+          require("harpoon"):list():append()
+        end,
+        desc = "Harpoon: add file",
+      },
+      {
+        "<leader>hm",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "Harpoon: menu",
+      },
+    },
+    config = function()
+      require("rasul.config.harpoon") -- только setup
+    end,
   },
 
   ---------------------------------------------------------------------------
