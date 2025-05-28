@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": [ "clock", "custom/weather", "sway/language", "custom/scratchpad-indicator", "custom/pacman", "sway/mode"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": [ "custom/cpugovernor", "cpu", "temperature", "pulseaudio", "bluetooth", "network", "tray", "battery"],
+    "modules-right": ["cpu", "temperature", "pulseaudio", "bluetooth", "network", "tray", "battery"],
 
     // Modules configuration
     "sway/workspaces": {
@@ -119,18 +119,6 @@
         "exec": "curl 'https://wttr.in/?format=1'",
         "interval": 3600
     },
-    "custom/cpugovernor": {
-      "format": "{icon}",
-      "interval": "30",
-      "return-type": "json",
-      "exec": "$HOME/.config/waybar/custom_modules/cpugovernor.sh",
-      "min-length": 2,
-      "max-length": 2,
-        "format-icons": {
-            "perf": "",
-            "sched": ""
-        },
-    },    
     "custom/scratchpad-indicator": {
         "interval": 3,
         "return-type": "json",
