@@ -82,7 +82,7 @@
 #mode,
 #network,
 #pulseaudio,
-#temperature,
+#custom-temperature,
 #custom-alsa,
 #custom-pacman,
 #custom-weather,
@@ -99,7 +99,7 @@
 /* Each module that should blink */
 #mode,
 #memory,
-#temperature,
+#custom-temperature,
 #battery {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -109,7 +109,7 @@
 /* Each critical module */
 #memory.critical,
 #cpu.critical,
-#temperature.critical,
+#custom-temperature.critical,
 #battery.critical {
     color: @critical;
 }
@@ -117,7 +117,7 @@
 /* Each critical that should blink */
 #mode,
 #memory.critical,
-#temperature.critical,
+#custom-temperature.critical,
 #battery.critical.discharging {
     animation-name: blink-critical;
     animation-duration: 2s;
@@ -127,7 +127,7 @@
 #network.disconnected,
 #memory.warning,
 #cpu.warning,
-#temperature.warning,
+#custom-temperature.warning,
 #battery.warning {
     background: @warning;
     color: @nord_dark_font;
@@ -242,11 +242,11 @@
 #custom-cpugovernor.perf {
     
 }
-#temperature {
+#custom-temperature {
     background-color: @nord_bg;
     color: #D8DEE9;
 }
-#temperature.critical {
+#custom-temperature.critical {
     background:  @critical;
 }
 #custom-layout {
