@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": [ "clock", "custom/weather", "sway/language", "custom/scratchpad-indicator", "custom/pacman", "sway/mode"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["cpu", "temperature", "pulseaudio", "bluetooth", "network", "tray", "battery"],
+    "modules-right": ["cpu", "temperature", "pulseaudio", "backlight", "bluetooth", "network", "tray", "battery"],
 
     // Modules configuration
     "sway/workspaces": {
@@ -104,6 +104,13 @@
         },
         "on-click": "pavucontrol",
         "on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "  {percent}%",
+        "format-icons": ["", ""],
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
     },
     "custom/pacman": {
         "format": "  {}",
