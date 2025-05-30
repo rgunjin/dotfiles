@@ -2,6 +2,8 @@ if status is-interactive
     if test -z "$DISPLAY" -a -z "$WAYLAND_DISPLAY"
         exec sway
     end
+
+    eval (starship init fish)
 end
 
 function fish_greeting
@@ -14,9 +16,10 @@ set -gx VISUAL nvim
 set -gx PAGER less
 set -gx LESS "-RFX"
 
-eval (starship init fish)
 
 bind ctrl-ц backward-kill-word
 bind ctrl-в 'test (commandline) = ""; and exit'
 bind ctrl-g tmux-sessionizer
+bind ctrl-f firefox
+
 alias projector='mpv --profile=projector --title=projector'
