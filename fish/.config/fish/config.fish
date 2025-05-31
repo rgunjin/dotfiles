@@ -20,6 +20,6 @@ set -gx LESS "-RFX"
 bind ctrl-ц backward-kill-word
 bind ctrl-в 'test (commandline) = ""; and exit'
 bind ctrl-g tmux-sessionizer
-bind ctrl-f firefox
+bind ctrl-f 'firefox &'
 
 alias projector='mpv --profile=projector --title=projector'
