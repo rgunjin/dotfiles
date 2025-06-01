@@ -56,11 +56,7 @@ for_window [app_id="mpv" title="projector"] move to workspace 0
 #
 # Example configuration:
 #
-exec_always dbus-update-activation-environment --systemd \
-    DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP \
-    XDG_SESSION_TYPE XDG_SESSION_CLASS XDG_SESSION_ID \
-    DBUS_SESSION_BUS_ADDRESS
-
+#
 exec swayidle -w \
     timeout 300 'swaylock -f --daemonize --image ~/Pictures/wallpapers/simon_starling_house.jpeg' \
     timeout 600 'swaymsg "output eDP-1 dpms off"' \
