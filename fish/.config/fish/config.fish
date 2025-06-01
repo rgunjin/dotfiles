@@ -1,6 +1,6 @@
 if status is-interactive
     if test -z "$DISPLAY" -a -z "$WAYLAND_DISPLAY"
-        exec sway
+        exex dbus-run-session sway
     end
 
     eval (starship init fish)
