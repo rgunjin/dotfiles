@@ -8,8 +8,13 @@ if status is-interactive
     set -gx MOZ_ENABLE_WAYLAND 1
     set -gx SDL_VIDEODRIVER wayland
 
-    # Обновляем окружение для systemd user session
-    dbus-update-activation-environment --systemd --all
+    if test -z "$XDG_RUNTIME_DIR"
+        set -gx XDG_RUNTIME_DIR /run/user/(id -u)
+    end
+
+    if set -q DBUS_SESSION_BUS_ADDRESS
+        dbus-update-activation-environment --systemd --all
+    end
 
     if test -z "$DISPLAY" -a -z "$WAYLAND_DISPLAY"
         exec sway

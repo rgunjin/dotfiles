@@ -59,8 +59,8 @@ for_window [app_id="mpv" title="projector"] move to workspace 0
 #
 exec swayidle -w \
     timeout 300 'swaylock -f --daemonize --image ~/Pictures/wallpapers/simon_starling_house.jpeg' \
-    timeout 600 'swaymsg "output eDP-1 dpms off"' \
-    resume 'swaymsg "output eDP-1 dpms on"' \
+    timeout 600 'swaymsg "output LVDS-1 dpms off"' \
+    resume 'swaymsg "output LVDS-1 dpms on"' \
     before-sleep 'swaylock -f --daemonize --image ~/Pictures/wallpapers/simon_starling_house.jpeg'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
