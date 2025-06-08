@@ -20,11 +20,7 @@ map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
 -- greatest remap ever
-map("x", "<leader>p", [["_dP]])
-
--- next greatest remap ever : asbjornHaland
-map({ "n", "v" }, "<leader>y", [["+y]])
-map("n", "<leader>Y", [["+Y]])
+map("x", "<leader>gp", [["_dP]])
 
 map({ "n", "v" }, "<leader>d", [["_d]])
 
@@ -39,6 +35,7 @@ end, { silent = true })
 -- Format LSP
 map("n", "<leader>f", vim.lsp.buf.format)
 
+-- Quick-List
 map("n", "<C-k>", "<cmd>cnext<CR>zz")
 map("n", "<C-j>", "<cmd>cprev<CR>zz")
 map("n", "<leader>k", "<cmd>lnext<CR>zz")

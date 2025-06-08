@@ -20,6 +20,7 @@ opt.undofile = true
 opt.hlsearch = false
 opt.incsearch = true
 
+opt.guicursor = ""
 opt.termguicolors = true
 
 opt.scrolloff = 8
