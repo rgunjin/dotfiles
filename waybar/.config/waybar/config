@@ -126,7 +126,7 @@
         "on-click-right": "exec swaymsg 'move scratchpad'"
     },
     "battery": {
-        "bat": "BAT1",
+        "bat": "BAT0",
         "interval": 15,
         "states": {
             "warning": 35,

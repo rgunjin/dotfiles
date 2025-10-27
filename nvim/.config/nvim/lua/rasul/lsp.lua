@@ -6,10 +6,11 @@ require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
-    "pyright",
+    "pylsp",
     "bashls",
     "clangd",          -- C / C++
     "rust_analyzer",   -- Rust
+    "gopls",
   },
   automatic_installation = true,
 })
@@ -40,15 +41,14 @@ cmp.setup({
   },
 })
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -----------------------------------------------------------------
 -- LSP servers --------------------------------------------------
 -----------------------------------------------------------------
-local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- 🔹 Lua --------------------------------------------------------
-lspconfig.lua_ls.setup({
+vim.lsp.config("lua_ls", {
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -59,23 +59,23 @@ lspconfig.lua_ls.setup({
 })
 
 -- 🔹 Python -----------------------------------------------------
-lspconfig.pyright.setup({
+vim.lsp.config("pyright", {
   capabilities = capabilities,
 })
 
 -- 🔹 Bash -------------------------------------------------------
-lspconfig.bashls.setup({
+vim.lsp.config("bashls", {
   capabilities = capabilities,
 })
 
 -- 🔹 C / C++ ----------------------------------------------------
-lspconfig.clangd.setup({
+vim.lsp.config("clangd", {
   capabilities = capabilities,
   cmd = { "clangd", "--offset-encoding=utf-16" }, -- корректный offset для cmp
 })
 
 -- 🔹 Rust -------------------------------------------------------
-lspconfig.rust_analyzer.setup({
+vim.lsp.config("rust_analyzer", {
   capabilities = capabilities,
   settings = {
     ["rust-analyzer"] = {
@@ -85,3 +85,7 @@ lspconfig.rust_analyzer.setup({
   },
 })
 
+-- 🔹 Go ---------------------------------------------------------
+vim.lsp.config("gopls", {
+    capabilities = capabilities,
+})

@@ -40,10 +40,10 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /media/Pictures/wallpapers/steam_boat_1.jpg fill
+output * bg ~/notes/wallpapers/simon_starling_1.jpg fill
 #
 # Example configuration:
-output LVDS-1 mode 1366x768@60Hz position 0,0 adaptive_sync on
+output eDP-1 mode 1920x1080@60Hz position 0,0 adaptive_sync on
 #
 #output HDMI-A-1 mode 1920x1080@60Hz position 1366,0 adaptive_sync on
 #
@@ -58,10 +58,10 @@ for_window [app_id="mpv" title="projector"] move to workspace 0
 #
 #
 exec swayidle -w \
-    timeout 300 'swaylock -f --daemonize --image ~/Pictures/wallpapers/simon_starling_house.jpeg' \
-    timeout 600 'swaymsg "output LVDS-1 dpms off"' \
-    resume 'swaymsg "output LVDS-1 dpms on"' \
-    before-sleep 'swaylock -f --daemonize --image ~/Pictures/wallpapers/simon_starling_house.jpeg'
+    timeout 300 'swaylock -f --daemonize --image ~/notes/wallpapers/simon_starling_house.jpeg' \
+    timeout 600 'swaymsg "output eDP-1 dpms off"' \
+    resume 'swaymsg "output eDP-1 dpms on"' \
+    before-sleep 'swaylock -f --daemonize --image ~/notes/wallpapers/simon_starling_house.jpeg'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
