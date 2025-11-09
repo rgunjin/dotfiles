@@ -14,12 +14,14 @@ LOAD_THRESHOLD_DOWN = 20
 STEP_FREQS = [2200000, 2400000, MAX_FREQ]
 SLEEP_INTERVAL = 1  # основной цикл
 
+
 def write_file(path, value):
     try:
         with open(path, "w") as f:
             f.write(str(value))
     except PermissionError:
         pass  # демон тихо игнорирует ошибки прав
+
 
 def set_min_max_freq(min_freq, max_freq):
     for cpu in os.listdir(CPU_PATH):
@@ -30,12 +32,14 @@ def set_min_max_freq(min_freq, max_freq):
                 if os.path.exists(path):
                     write_file(path, val)
 
+
 def enable_turbo_boost():
     for cpu in os.listdir(CPU_PATH):
         if cpu.startswith("cpu") and cpu[3:].isdigit():
             path = os.path.join(CPU_PATH, cpu, "cpufreq", "boost")
             if os.path.exists(path):
                 write_file(path, TURBO)
+
 
 def set_governor(governor):
     for cpu in os.listdir(CPU_PATH):
@@ -44,6 +48,7 @@ def set_governor(governor):
             if os.path.exists(path):
                 write_file(path, governor)
 
+
 def gradual_max_freq(current_max, target_max):
     for step in STEP_FREQS:
         if step > current_max and step <= target_max:
@@ -51,6 +56,7 @@ def gradual_max_freq(current_max, target_max):
             time.sleep(0.5)
             current_max = step
     return current_max
+
 
 def main():
     set_min_max_freq(MIN_FREQ, MIN_FREQ)
@@ -69,6 +75,6 @@ def main():
             current_max = MIN_FREQ
         time.sleep(SLEEP_INTERVAL)
 
+
 if __name__ == "__main__":
     main()
-
