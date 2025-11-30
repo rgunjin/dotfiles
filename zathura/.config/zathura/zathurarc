@@ -1,0 +1,17 @@
+set selection-clipboard clipboard
+
+# --- Цвета / тёмный режим ---
+set recolor true
+set recolor-darkcolor "#ffffff"
+set recolor-lightcolor "#000000"
+
+# --- Навигация ---
+map j scroll down
+map k scroll up
+map h scroll left
+map l scroll right
+map <Space> scroll down
+map <BackSpace> scroll up
+
+# --- Тёмный режим вручную ---
+map <F5> set recolor!    # переключение dark/light
