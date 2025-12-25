@@ -30,3 +30,6 @@ opt.isfname:append("@-@")
 opt.updatetime = 50
 
 opt.colorcolumn = "80"
+
+opt.makeprg = "make"
+opt.errorformat = "%f:%l:%c: %m"

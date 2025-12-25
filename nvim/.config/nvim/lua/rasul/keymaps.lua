@@ -35,7 +35,11 @@ end, { silent = true })
 -- Format LSP
 map("n", "<leader>f", vim.lsp.buf.format)
 
--- Quick-List
+-- Запуск make
+map("n", "<leader>m", ":make<CR>", { desc = "Run make" })
+
+-- Quickfix 
+map("n", "<leader>q", ":copen<CR>", { desc = "Open quickfix list" })
 map("n", "<C-k>", "<cmd>cnext<CR>zz")
 map("n", "<C-j>", "<cmd>cprev<CR>zz")
 map("n", "<leader>k", "<cmd>lnext<CR>zz")
