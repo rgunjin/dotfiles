@@ -39,4 +39,5 @@ bind ctrl-g tmux-sessionizer
 bind ctrl-f 'firefox &'
 
 alias projector='mpv --profile=projector --title=projector'
+alias sudo='doas'
 
