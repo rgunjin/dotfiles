@@ -114,8 +114,10 @@
         "min-length": 3
     },
     "custom/weather": {
-        "exec": "curl 'https://wttr.in/?format=1'",
-        "interval": 3600
+        //"exec": "curl 'https://wttr.in/?format=1'",
+        //"interval": 3600
+         "exec": "curl -s 'https://api.open-meteo.com/v1/forecast?latitude=51.1696&longitude=6.6861&current=temperature_2m,weather_code' | jq -r '\" \" + (.current.temperature_2m|tostring) + \"°C\"'",
+         "interval": 1800
     },
     "custom/scratchpad-indicator": {
         "interval": 3,
