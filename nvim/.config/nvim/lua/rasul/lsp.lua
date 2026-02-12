@@ -2,7 +2,7 @@
 -- Diagnostics (современный API) -------------------------------
 -----------------------------------------------------------------
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = false,
   float = {
     border = "rounded",
     focusable = false,
