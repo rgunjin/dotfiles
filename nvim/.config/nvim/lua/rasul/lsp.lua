@@ -41,14 +41,14 @@ cmp.setup({
   },
 })
 
-
 -----------------------------------------------------------------
 -- LSP servers --------------------------------------------------
 -----------------------------------------------------------------
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local lspconfig = require("lspconfig")
 
 -- 🔹 Lua --------------------------------------------------------
-vim.lsp.config("lua_ls", {
+lspconfig.lua_ls.setup({
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -59,23 +59,23 @@ vim.lsp.config("lua_ls", {
 })
 
 -- 🔹 Python -----------------------------------------------------
-vim.lsp.config("pyright", {
+lspconfig.pyright.setup({
   capabilities = capabilities,
 })
 
 -- 🔹 Bash -------------------------------------------------------
-vim.lsp.config("bashls", {
+lspconfig.bashls.setup({
   capabilities = capabilities,
 })
 
 -- 🔹 C / C++ ----------------------------------------------------
-vim.lsp.config("clangd", {
+lspconfig.clangd.setup({
   capabilities = capabilities,
-  cmd = { "clangd", "--offset-encoding=utf-16" }, -- корректный offset для cmp
+  cmd = { "clangd", "--offset-encoding=utf-16" },
 })
 
 -- 🔹 Rust -------------------------------------------------------
-vim.lsp.config("rust_analyzer", {
+lspconfig.rust_analyzer.setup({
   capabilities = capabilities,
   settings = {
     ["rust-analyzer"] = {
@@ -86,6 +86,7 @@ vim.lsp.config("rust_analyzer", {
 })
 
 -- 🔹 Go ---------------------------------------------------------
-vim.lsp.config("gopls", {
-    capabilities = capabilities,
+lspconfig.gopls.setup({
+  capabilities = capabilities,
 })
+
