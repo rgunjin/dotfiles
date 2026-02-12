@@ -50,3 +50,8 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Grep in project" })
+
+-- Float_Warrning
+map("n", "<leader>e", function()
+    vim.diagnostic.open_float(nil, { focus = false })
+end)

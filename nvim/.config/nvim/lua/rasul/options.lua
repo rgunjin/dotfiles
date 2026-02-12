@@ -33,11 +33,3 @@ opt.colorcolumn = "80"
 
 opt.makeprg = "make"
 opt.errorformat = "%f:%l:%c: %m"
-
-vim.diagnostic.config({
-    virtual_text = true;
-    signs = true;
-    underline = true;
-    update_in_insert = true;
-    severety_sort = true;
-})

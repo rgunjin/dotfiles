@@ -8,15 +8,15 @@ require("mason-lspconfig").setup({
     "lua_ls",
     "pylsp",
     "bashls",
-    "clangd",          -- C / C++
-    "rust_analyzer",   -- Rust
+    "clangd",
+    "rust_analyzer",
     "gopls",
   },
   automatic_installation = true,
 })
 
 -----------------------------------------------------------------
--- nvim-cmp (completion) ---------------------------------------
+-- nvim-cmp -----------------------------------------------------
 -----------------------------------------------------------------
 local cmp     = require("cmp")
 local luasnip = require("luasnip")
@@ -44,10 +44,10 @@ cmp.setup({
 -----------------------------------------------------------------
 -- LSP servers --------------------------------------------------
 -----------------------------------------------------------------
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
--- 🔹 Lua --------------------------------------------------------
+-- Lua
 lspconfig.lua_ls.setup({
   capabilities = capabilities,
   settings = {
@@ -58,23 +58,23 @@ lspconfig.lua_ls.setup({
   },
 })
 
--- 🔹 Python -----------------------------------------------------
-lspconfig.pyright.setup({
+-- Python
+lspconfig.pylsp.setup({
   capabilities = capabilities,
 })
 
--- 🔹 Bash -------------------------------------------------------
+-- Bash
 lspconfig.bashls.setup({
   capabilities = capabilities,
 })
 
--- 🔹 C / C++ ----------------------------------------------------
+-- C/C++
 lspconfig.clangd.setup({
   capabilities = capabilities,
   cmd = { "clangd", "--offset-encoding=utf-16" },
 })
 
--- 🔹 Rust -------------------------------------------------------
+-- Rust
 lspconfig.rust_analyzer.setup({
   capabilities = capabilities,
   settings = {
@@ -85,7 +85,7 @@ lspconfig.rust_analyzer.setup({
   },
 })
 
--- 🔹 Go ---------------------------------------------------------
+-- Go
 lspconfig.gopls.setup({
   capabilities = capabilities,
 })
