@@ -81,7 +81,9 @@ local servers = {
   bashls = {},
 
   clangd = {
-    cmd = { "clangd", "--offset-encoding=utf-16" },
+      capabilities = {
+          offsetEncoding = { "utf-8" },
+      },
   },
 
   rust_analyzer = {
