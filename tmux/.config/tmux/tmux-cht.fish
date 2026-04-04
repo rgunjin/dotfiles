@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 set languages c cpp python rust golang
-set core_utils grep sed awk find xargs curl make git strace
+set core_utils grep sed awk find xargs curl make git ssh
 
 set options $languages $core_utils
 
