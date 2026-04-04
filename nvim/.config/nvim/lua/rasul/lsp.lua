@@ -1,35 +1,30 @@
 -----------------------------------------------------------------
--- Diagnostics (современный API) -------------------------------
+-- Diagnostics --------------------------------------------------
 -----------------------------------------------------------------
 vim.diagnostic.config({
   virtual_text = false,
   float = {
-    border = "rounded",
+    border    = "rounded",
     focusable = false,
-    max_width = 80,
+    max_width  = 80,
     max_height = 20,
-    source = "always",
-    header = "",
-    prefix = "",
+    source    = "always",
+    header    = "",
+    prefix    = "",
   },
-  signs = true,
-  underline = true,
+  signs          = true,
+  underline      = true,
   update_in_insert = false,
 })
-
 -----------------------------------------------------------------
 -- nvim-cmp -----------------------------------------------------
 -----------------------------------------------------------------
 local cmp     = require("cmp")
 local luasnip = require("luasnip")
-
 require("luasnip.loaders.from_vscode").lazy_load()
-
 cmp.setup({
   snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
+    expand = function(args) luasnip.lsp_expand(args.body) end,
   },
   mapping = cmp.mapping.preset.insert({
     ["<Tab>"]   = cmp.mapping.select_next_item(),
@@ -42,7 +37,6 @@ cmp.setup({
     { name = "buffer"   },
   },
 })
-
 -----------------------------------------------------------------
 -- Общий on_attach ----------------------------------------------
 -----------------------------------------------------------------
@@ -50,57 +44,51 @@ local on_attach = function(_, bufnr)
   local map = function(mode, lhs, rhs)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr })
   end
-
-  map("n", "gd", vim.lsp.buf.definition)
-  map("n", "gr", vim.lsp.buf.references)
-  map("n", "K",  vim.lsp.buf.hover)
-  map("n", "<leader>rn", vim.lsp.buf.rename)
-  map("n", "<leader>ca", vim.lsp.buf.code_action)
-  map("n", "<leader>e", function()
+  map("n", "gd",          vim.lsp.buf.definition)
+  map("n", "gr",          vim.lsp.buf.references)
+  map("n", "K",           vim.lsp.buf.hover)
+  map("n", "<leader>rn",  vim.lsp.buf.rename)
+  map("n", "<leader>ca",  vim.lsp.buf.code_action)
+  map("n", "<leader>e",   function()
     vim.diagnostic.open_float(nil, { focus = false })
   end)
 end
-
 -----------------------------------------------------------------
--- LSP servers --------------------------------------------------
+-- LSP servers (новый API, Neovim 0.11+) -----------------------
 -----------------------------------------------------------------
-local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local servers = {
-  lua_ls = {
-    settings = {
-      Lua = {
-        diagnostics = { globals = { "vim" } },
-        workspace   = { checkThirdParty = false },
-      },
+-- Базовый конфиг, общий для всех серверов
+vim.lsp.config("*", {
+  capabilities = capabilities,
+  on_attach    = on_attach,
+})
+
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      diagnostics = { globals = { "vim" } },
+      workspace   = { checkThirdParty = false },
     },
   },
+})
 
-  pylsp = {},
-  bashls = {},
+vim.lsp.config("clangd", {
+  on_attach = on_attach,
+  capabilities = vim.tbl_deep_extend("force", capabilities, {
+    offsetEncoding = { "utf-8" },
+  }),
+})
 
-  clangd = {
-      capabilities = {
-          offsetEncoding = { "utf-8" },
-      },
-  },
-
-  rust_analyzer = {
-    settings = {
-      ["rust-analyzer"] = {
-        cargo = { allFeatures = true },
-        checkOnSave = { command = "clippy" },
-      },
+vim.lsp.config("rust_analyzer", {
+  on_attach = on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      cargo      = { allFeatures = true },
+      checkOnSave = { command = "clippy" },
     },
   },
+})
 
-  gopls = {},
-}
-
-for name, config in pairs(servers) do
-  config.capabilities = capabilities
-  config.on_attach = on_attach
-  lspconfig[name].setup(config)
-end
-
+-- Серверы без дополнительных настроек
+vim.lsp.enable({ "lua_ls", "pylsp", "bashls", "clangd", "rust_analyzer", "gopls" })
