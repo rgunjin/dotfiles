@@ -2,28 +2,31 @@
 set notes_dir "$HOME/notes"
 mkdir -p "$notes_dir"
 
-set existing_notes (find $notes_dir -type f -name '*.md' -exec basename {} .md \;)
+set existing_notes (find $notes_dir -maxdepth 1 -type f -name '*.md' -exec basename {} .md \;)
 
 set raw (printf '%s\n' $existing_notes | fzf --prompt="Note: " --print-query --layout=reverse --height=40%)
+set fzf_status $status
 
-if test $status -ne 0
+if test $fzf_status -eq 130
     exit 0
 end
 
 set lines (string split \n -- $raw)
-set query (string trim -- $lines[1])    # что набрал в fzf
+set query (string trim -- $lines[1])
 set selection ""
 if test (count $lines) -ge 2
-    set selection (string trim -- $lines[2])  # что выбрал из списка
+    set selection (string trim -- $lines[2])
 end
 
-# Если что-то выбрано из списка — открываем это
-if test -n "$selection"
+if test -n "$selection" -a -n "$query"
+    # набрал текст и выбрал из списка — открываем выбранное
     nvim "$notes_dir/$selection.md"
-# Иначе если что-то набрал — создаём новый файл
+else if test -n "$selection" -a -z "$query"
+    # ничего не набрал но выбрал — это случай пустого Enter, открываем TODO
+    nvim "$notes_dir/TODO.md"
 else if test -n "$query"
+    # набрал что-то чего нет в списке — создаём новый
     nvim "$notes_dir/$query.md"
-# Иначе открываем TODO
 else
     nvim "$notes_dir/TODO.md"
 end
