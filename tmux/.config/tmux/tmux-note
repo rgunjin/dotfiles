@@ -1,10 +1,8 @@
 #!/usr/bin/env fish
-
 set notes_dir "$HOME/notes"
 mkdir -p "$notes_dir"
 
 set existing_notes (find $notes_dir -type f -name '*.md' -exec basename {} .md \;)
-set first_note (string trim -- (printf '%s\n' $existing_notes | head -n1))
 
 set raw (printf '%s\n' $existing_notes | fzf --prompt="Note: " --print-query --layout=reverse --height=40%)
 
@@ -13,21 +11,19 @@ if test $status -ne 0
 end
 
 set lines (string split \n -- $raw)
-set input (string trim -- $lines[1])
+set query (string trim -- $lines[1])    # что набрал в fzf
 set selection ""
-
 if test (count $lines) -ge 2
-    set selection (string trim -- $lines[2])
+    set selection (string trim -- $lines[2])  # что выбрал из списка
 end
 
-if test -z "$input"
-    if test "$selection" = "$first_note"
-        nvim "$notes_dir/TODO.md"
-    else
-        nvim "$notes_dir/$selection.md"
-    end
-else if test "$input" = "$selection"
+# Если что-то выбрано из списка — открываем это
+if test -n "$selection"
     nvim "$notes_dir/$selection.md"
+# Иначе если что-то набрал — создаём новый файл
+else if test -n "$query"
+    nvim "$notes_dir/$query.md"
+# Иначе открываем TODO
 else
-    nvim "$notes_dir/$input.md"
+    nvim "$notes_dir/TODO.md"
 end
