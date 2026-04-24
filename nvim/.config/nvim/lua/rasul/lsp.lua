@@ -57,13 +57,10 @@ end
 -- LSP servers (новый API, Neovim 0.11+) -----------------------
 -----------------------------------------------------------------
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- Базовый конфиг, общий для всех серверов
 vim.lsp.config("*", {
   capabilities = capabilities,
   on_attach    = on_attach,
 })
-
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -72,14 +69,10 @@ vim.lsp.config("lua_ls", {
     },
   },
 })
-
 vim.lsp.config("clangd", {
-  on_attach = on_attach,
-  capabilities = vim.tbl_deep_extend("force", capabilities, {
-    offsetEncoding = { "utf-8" },
-  }),
+  on_attach    = on_attach,
+  capabilities = capabilities,
 })
-
 vim.lsp.config("rust_analyzer", {
   on_attach = on_attach,
   settings = {
@@ -89,6 +82,13 @@ vim.lsp.config("rust_analyzer", {
     },
   },
 })
-
--- Серверы без дополнительных настроек
 vim.lsp.enable({ "lua_ls", "pylsp", "bashls", "clangd", "rust_analyzer", "gopls" })
+-----------------------------------------------------------------
+-- Clangd commands ----------------------------------------------
+-----------------------------------------------------------------
+vim.api.nvim_create_user_command('ClangdSwitchSourceHeader', function()
+  vim.lsp.buf.execute_command({
+    command   = 'clangd.switchSourceHeader',
+    arguments = { vim.uri_from_bufnr(0) },
+  })
+end, {})

@@ -66,3 +66,6 @@ map({"i", "s"}, "<S-Tab>", function()
         luasnip.jump(-1)
     end
 end, { desc = "LuaSnip prev node" })
+
+-- Switch between .c and .h
+map("n", "<leader>a", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Switch .c/.h" })
