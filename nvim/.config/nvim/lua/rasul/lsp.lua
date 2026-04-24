@@ -98,3 +98,7 @@ vim.api.nvim_create_user_command('ClangdSwitchSourceHeader', function()
     end
   end)
 end, {})
+-------------------------------------------------------------------------------
+-- Clangd Mapping -------------------------------------------------------------
+-------------------------------------------------------------------------------
+vim.keymap.set("n", "<leader>a", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Switch .c/.h" })
