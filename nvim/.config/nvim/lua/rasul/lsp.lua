@@ -87,8 +87,14 @@ vim.lsp.enable({ "lua_ls", "pylsp", "bashls", "clangd", "rust_analyzer", "gopls"
 -- Clangd commands ----------------------------------------------
 -----------------------------------------------------------------
 vim.api.nvim_create_user_command('ClangdSwitchSourceHeader', function()
-  vim.lsp.buf.execute_command({
-    command   = 'clangd.switchSourceHeader',
-    arguments = { vim.uri_from_bufnr(0) },
-  })
+  local params = { uri = vim.uri_from_bufnr(0) }
+  vim.lsp.buf_request(0, 'textDocument/switchSourceHeader', params, function(err, result)
+    if err then
+      vim.notify(tostring(err), vim.log.levels.ERROR)
+      return
+    end
+    if result then
+      vim.cmd('e ' .. vim.uri_to_fname(result))
+    end
+  end)
 end, {})
