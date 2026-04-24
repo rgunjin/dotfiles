@@ -52,6 +52,8 @@ local on_attach = function(_, bufnr)
   map("n", "<leader>e",   function()
     vim.diagnostic.open_float(nil, { focus = false })
   end)
+  -- Switch .c/.h (только для clangd)
+  map("n", "<leader>a", "<cmd>ClangdSwitchSourceHeader<CR>")
 end
 -----------------------------------------------------------------
 -- LSP servers (новый API, Neovim 0.11+) -----------------------
@@ -98,7 +100,3 @@ vim.api.nvim_create_user_command('ClangdSwitchSourceHeader', function()
     end
   end)
 end, {})
--------------------------------------------------------------------------------
--- Clangd Mapping -------------------------------------------------------------
--------------------------------------------------------------------------------
-vim.keymap.set("n", "<leader>a", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Switch .c/.h" })
