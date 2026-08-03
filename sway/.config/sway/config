@@ -71,17 +71,30 @@ exec swayidle -w \
 #
 # Example configuration:
 #
+### Input configuration
+
+# Тачпад. dwt/dwtp — блокировка на время набора и работы с трекпоинтом.
 input "type:touchpad" {
     dwt enabled
+    dwtp enabled
     tap enabled
     natural_scroll enabled
     middle_emulation enabled
 }
-#
+
 input "type:keyboard" {
     xkb_layout us,ru
     xkb_options grp:win_space_toggle
 }
+
+# Фантомная "клавиатура" от тачпада Dell: лишний HID-интерфейс, который
+# ядро классифицирует как keyboard. Имеет своё xkb-состояние модификаторов,
+# из-за чего Shift спонтанно залипает. См. logs/2026-08-03.md
+input "1160:4639:DELL09C0:00_0488:121F_UNKNOWN" {
+    events disabled
+}
+#
+# Список устройств: swaymsg -t get_inputs
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
