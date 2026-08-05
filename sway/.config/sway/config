@@ -112,6 +112,10 @@ input "1160:4639:DELL09C0:00_0488:121F_UNKNOWN" {
     # Start your launcher
     bindsym $mod+d exec $menu
 
+    # Fn+F8 на Dell шлёт Super+P (windows display switch).
+    # Без привязки сочетание проваливается в приложение и печатает "p".
+    bindsym $mod+p nop
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
