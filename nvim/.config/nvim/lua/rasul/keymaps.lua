@@ -37,6 +37,12 @@ map("n", "<leader>f", vim.lsp.buf.format)
 
 -- Запуск make
 map("n", "<leader>m", ":make<CR>", { desc = "Run make" })
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "c", "h" },
+    callback = function()
+        vim.opt_local.makeprg = "west build -b decawave_dwm1001_dev"
+    end,
+})
 
 -- Quickfix 
 map("n", "<leader>q", ":copen<CR>", { desc = "Open quickfix list" })
@@ -50,19 +56,3 @@ map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
 map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Grep in project" })
-
--- LuaSnip snippet navigation
-local luasnip = require("luasnip")
-map({"i", "s"}, "<Tab>", function()
-    if luasnip.jumpable(1) then
-        luasnip.jump(1)
-    else
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-    end
-end, { desc = "LuaSnip next node" })
-
-map({"i", "s"}, "<S-Tab>", function()
-    if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-    end
-end, { desc = "LuaSnip prev node" })
