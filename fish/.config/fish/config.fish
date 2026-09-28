@@ -16,9 +16,9 @@ if status is-interactive
         dbus-update-activation-environment --systemd --all
     end
 
-    if test -z "$DISPLAY" -a -z "$WAYLAND_DISPLAY"
+    if test -z "$DISPLAY" -a -z "$WAYLAND_DISPLAY" -a -z "$SSH_TTY" -a -z "$SSH_CONNECTION" -a -n "$XDG_VTNR"
         exec sway
-    end
+end
 
     eval (starship init fish)
 end
