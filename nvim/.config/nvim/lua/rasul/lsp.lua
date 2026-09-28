@@ -111,7 +111,7 @@ vim.lsp.config("rust_analyzer", {
     },
   },
 })
-vim.lsp.enable({ "lua_ls", "pylsp", "bashls", "clangd", "rust_analyzer", "gopls" })
+vim.lsp.enable({ "lua_ls", "pylsp", "bashls", "clangd", "rust_analyzer" })
 -----------------------------------------------------------------
 -- Clangd commands ----------------------------------------------
 -----------------------------------------------------------------
