@@ -116,4 +116,21 @@ return {
       "rafamadriz/friendly-snippets",
     },
   },
+  -----------------------------------------------------------------------------
+  -- SQL / dadbod -------------------------------------------------------------
+  -----------------------------------------------------------------------------
+  {
+    "tpope/vim-dadbod",
+    dependencies = {
+      "kristijanhusak/vim-dadbod-ui",
+      "kristijanhusak/vim-dadbod-completion",
+    },
+    cmd = { "DBUI", "DBUIToggle", "DB" },
+    init = function()
+      vim.g.db_ui_use_nerd_fonts = 1
+      vim.g.dbs = {
+        projektdb = "sqlserver://sa:IhkTraining456!@localhost:1433/ProjektDB",
+      }
+    end,
+  },
 }

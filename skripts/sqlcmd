@@ -1,0 +1,15 @@
+#!/bin/bash
+args=("$@")
+for i in "${!args[@]}"; do
+    if [[ "${args[$i]}" == "-i" ]]; then
+        hostfile="${args[$((i+1))]}"
+        docker cp "$hostfile" ihk-sql:/tmp/dadbod_query.sql
+        args[$((i+1))]="/tmp/dadbod_query.sql"
+    fi
+done
+
+if [[ -n "$SQLCMDPASSWORD" ]]; then
+    args+=(-P "$SQLCMDPASSWORD")
+fi
+
+docker exec -i ihk-sql /opt/mssql-tools18/bin/sqlcmd -C "${args[@]}"
