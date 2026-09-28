@@ -3,6 +3,7 @@ return {
   -- Treesitter -------------------------------------------------------------
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
     build  = ":TSUpdate",
     event  = { "BufReadPost", "BufNewFile" },
     config = function() require("rasul.config.treesitter") end,
